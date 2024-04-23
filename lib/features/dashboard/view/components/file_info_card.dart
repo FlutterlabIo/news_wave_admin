@@ -1,4 +1,5 @@
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -7,26 +8,26 @@ import '../../../../core/models/MyFiles.dart';
 
 class FileInfoCard extends StatelessWidget {
   const FileInfoCard({
-    Key? key,
+    super.key,
     required this.info,
-  }) : super(key: key);
+  });
 
   final CloudStorageInfo info;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(defaultPadding),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.all(defaultPadding),
+      decoration: const BoxDecoration(
         color: secondaryColor,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
             children: [
               Container(
                 padding: EdgeInsets.all(defaultPadding * 0.75),
@@ -42,28 +43,36 @@ class FileInfoCard extends StatelessWidget {
                       info.color ?? Colors.black, BlendMode.srcIn),
                 ),
               ),
-              Icon(Icons.more_vert, color: Colors.white54)
+             SizedBox(width: 10,),
+             /* Icon(Icons.more_vert, color: Colors.white54)*/
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    info.title!,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    "${info.numOfFiles}",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodySmall!
+                        .copyWith(color: Colors.white70),
+                  ),
+                ],
+              ),
             ],
           ),
-          Text(
-            info.title!,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-          ProgressLine(
+
+          /*ProgressLine(
             color: info.color,
             percentage: info.percentage,
-          ),
-          Row(
+          ),*/
+         /* Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                "${info.numOfFiles} Files",
-                style: Theme.of(context)
-                    .textTheme
-                    .bodySmall!
-                    .copyWith(color: Colors.white70),
-              ),
+
               Text(
                 info.totalStorage!,
                 style: Theme.of(context)
@@ -72,7 +81,7 @@ class FileInfoCard extends StatelessWidget {
                     .copyWith(color: Colors.white),
               ),
             ],
-          )
+          )*/
         ],
       ),
     );

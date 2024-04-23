@@ -1,12 +1,10 @@
 
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
-import 'package:news_wave_admin/features/dashboard/controllers/MenuAppController.dart';
-import 'package:provider/provider.dart';
 import '../../../core/constant/constants.dart';
 import '../../../core/responsive.dart';
+import 'components/dashboardData.dart';
 import 'components/header.dart';
-import 'components/storage_details.dart';
 
 @RoutePage()
 class DashboardScreen extends StatelessWidget {
@@ -14,9 +12,7 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(providers: [
-      ChangeNotifierProvider(create: (context)=>MenuAppController()),
-    ],child: SafeArea(
+    return SafeArea(
       child: SingleChildScrollView(
         primary: false,
         padding: const EdgeInsets.all(defaultPadding),
@@ -31,7 +27,7 @@ class DashboardScreen extends StatelessWidget {
                   flex: 5,
                   child: Column(
                     children: [
-                      /* MyFiles(),*/
+                      DashBoardData(),
                       SizedBox(height: defaultPadding),
                       // RecentFiles(),
                       /* if (Responsive.isMobile(context))
@@ -43,16 +39,16 @@ class DashboardScreen extends StatelessWidget {
                 if (!Responsive.isMobile(context))
                   const SizedBox(width: defaultPadding),
                 // On Mobile means if the screen is less than 850 we don't want to show it
-                if (!Responsive.isMobile(context))
+              /*  if (!Responsive.isMobile(context))
                   const Expanded(
                     flex: 2,
                     child: StorageDetails(),
-                  ),
+                  ),*/
               ],
             )
           ],
         ),
       ),
-    ),);
+    );
   }
 }

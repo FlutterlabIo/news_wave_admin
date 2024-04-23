@@ -1,48 +1,48 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_wave_admin/core/util/text_style.dart';
-
 import 'app_colors.dart';
-import 'button_style.dart';
-class CustomButtons {
-  CustomButtons._();
 
-  static Widget fill({
-    required String name,
-    Function? onPressed,
-    Color? color,
-    Color? textColor,
-    double? height,
-    double? radius,
-    double? width,
-    double? fontSize,
-  }) {
+class CustomButtons extends StatelessWidget {
+  final String title;
+  const CustomButtons({super.key, required this.title});
+
+  @override
+  Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
-        if (onPressed != null) {
-          onPressed();
-        }
-      },
-      style: AppButtonStyles.flat,
-      child: Container(
-        width: width,
-        height: height??46.h,
-        padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 20.w),
-        decoration: BoxDecoration(
-          color: color ?? AppColors.blue,
-          borderRadius: BorderRadius.circular(
-            radius ?? 12.r,
-          ),
-        ),
-        child: Center(
-          child: Text(
-            name,
-            style: AppTextStyle.buttonText().copyWith(
-                color: textColor, fontSize: fontSize,),
-          ),
-        ),
+      onPressed: () {},
+      style: ButtonStyle(
+        minimumSize: MaterialStateProperty.all(Size.zero),
+        backgroundColor:
+        MaterialStateProperty.all(Colors.transparent),
+        elevation: MaterialStateProperty.all(0),
+        overlayColor:
+        MaterialStateProperty.all(Colors.transparent),
+        alignment: Alignment.center,
+        padding: MaterialStateProperty.all(EdgeInsets.zero),
+        shadowColor:
+        MaterialStateProperty.all(Colors.transparent),
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       ),
-    );
+      child:  Center(
+        child: Container(
+          width: 300,
+          height:46,
+          padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+          decoration: BoxDecoration(
+            color: AppColors.blue,
+            borderRadius: BorderRadius.circular(
+              12,
+            ),
+          ),
+          child: Center(
+            child: Text(
+              title,
+              style: AppTextStyle.buttonText(),
+            ),
+          ),
+        ),
+      ),);
   }
 }
+

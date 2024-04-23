@@ -21,7 +21,7 @@ class CloudStorageInfo {
 
 List demoMyFiles = [
   CloudStorageInfo(
-    title: "Documents",
+    title: "Featured Section",
     numOfFiles: 1328,
     svgSrc: "assets/icons/Documents.svg",
     totalStorage: "1.9GB",
@@ -29,7 +29,7 @@ List demoMyFiles = [
     percentage: 35,
   ),
   CloudStorageInfo(
-    title: "Google Drive",
+    title: "Total Category",
     numOfFiles: 1328,
     svgSrc: "assets/icons/google_drive.svg",
     totalStorage: "2.9GB",
@@ -37,7 +37,7 @@ List demoMyFiles = [
     percentage: 35,
   ),
   CloudStorageInfo(
-    title: "One Drive",
+    title: "Total News",
     numOfFiles: 1328,
     svgSrc: "assets/icons/one_drive.svg",
     totalStorage: "1GB",
@@ -45,8 +45,32 @@ List demoMyFiles = [
     percentage: 10,
   ),
   CloudStorageInfo(
-    title: "Documents",
+    title: "Total Breaking News",
     numOfFiles: 5328,
+    svgSrc: "assets/icons/drop_box.svg",
+    totalStorage: "7.3GB",
+    color: Color(0xFF007EE5),
+    percentage: 78,
+  ),
+  CloudStorageInfo(
+    title: "Enabled Language",
+    numOfFiles: 3,
+    svgSrc: "assets/icons/drop_box.svg",
+    totalStorage: "7.3GB",
+    color: Color(0xFF007EE5),
+    percentage: 78,
+  ),
+  CloudStorageInfo(
+    title: "Pages",
+    numOfFiles: 4,
+    svgSrc: "assets/icons/drop_box.svg",
+    totalStorage: "7.3GB",
+    color: Color(0xFF007EE5),
+    percentage: 78,
+  ),
+  CloudStorageInfo(
+    title: "Ad Spaces",
+    numOfFiles: 4,
     svgSrc: "assets/icons/drop_box.svg",
     totalStorage: "7.3GB",
     color: Color(0xFF007EE5),
