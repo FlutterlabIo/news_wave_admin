@@ -18,6 +18,8 @@ dependencies:
   auto_route: ^8.0.3
   flutter_screenutil: ^5.9.0
   flutter_localization: ^0.2.0
+  firebase_core: ^2.30.1
+  firebase_auth: ^4.19.4
 
 
 

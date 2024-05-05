@@ -1,4 +1,5 @@
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -7,8 +8,15 @@ import 'core/util/routes/app_routes.dart';
 import 'features/dashboard/controllers/MenuAppController.dart';
 import 'features/main/main_screen.dart';
 
-void main() {
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: const FirebaseOptions(
+        apiKey: 'AIzaSyCXIpJYBSOc8CXmRYb9yTWLZnqiOHOJx5Y',
+        appId: "1:830673126725:web:45310947f8f5978ebdea2c",
+        messagingSenderId: "830673126725",
+        projectId: "news-wave-6e564")
+  );
   runApp(const MyApp());
 }
 
