@@ -112,7 +112,7 @@ class _LoginViewState extends State<LoginView> {
                 SizedBox(
                   height: 10,
                 ),
-                const CustomButtons(title: 'Login')
+                 CustomButtons(title: 'Login',onPressed: (){},)
               ],
             ),
           ),

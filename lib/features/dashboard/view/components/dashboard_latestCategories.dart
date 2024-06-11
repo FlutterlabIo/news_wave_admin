@@ -97,7 +97,7 @@ class DashboardLatestCategories extends StatelessWidget {
                                   fit: BoxFit.cover,
                                 )),
                           ),
-                          SizedBox(width: 10,),
+                          const SizedBox(width: 10,),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,

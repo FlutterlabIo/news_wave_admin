@@ -5,12 +5,13 @@ import 'app_colors.dart';
 
 class CustomButtons extends StatelessWidget {
   final String title;
-  const CustomButtons({super.key, required this.title});
+  final VoidCallback onPressed;
+  const CustomButtons({super.key, required this.title, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: onPressed,
       style: ButtonStyle(
         minimumSize: MaterialStateProperty.all(Size.zero),
         backgroundColor:

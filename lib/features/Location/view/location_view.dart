@@ -1,22 +1,27 @@
 import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:news_wave_admin/core/services/database_service.dart';
 import 'package:news_wave_admin/core/util/app_colors.dart';
 import 'package:news_wave_admin/core/util/app_text_field_styles.dart';
 import 'package:news_wave_admin/core/util/custom_buttons.dart';
 import 'package:news_wave_admin/core/util/form_text_field.dart';
 import 'package:news_wave_admin/core/util/text_style.dart';
+import 'package:news_wave_admin/features/Location/model/location_model.dart';
 import '../../../core/constant/constants.dart';
 import '../../../core/responsive.dart';
 import '../../dashboard/view/components/header.dart';
 
 @RoutePage()
 class LocationView extends StatelessWidget {
-   const LocationView({super.key});
+  const LocationView({super.key});
 
   @override
   Widget build(BuildContext context) {
     final controller = TextEditingController();
+    final DatabaseLocationService _databaseService = DatabaseLocationService();
     final List<Map<String, dynamic>> tableData = [
       {
         'id': 1,
@@ -56,8 +61,14 @@ class LocationView extends StatelessWidget {
                         children: [
                           const SizedBox(),
                           GestureDetector(
-                            onTap: (){
-                              debugPrint('Add location clicked');
+                            onTap: () {
+                              LocationModel location = LocationModel(
+                                  createdOn: Timestamp.now(),
+                                  lat: 3.4345,
+                                  locationName: "Rangpur",
+                                  lon: 1.3456);
+                              _databaseService.addLocation(location);
+                              debugPrint('clicked');
                             },
                             child: Container(
                               height: 40,
@@ -74,13 +85,13 @@ class LocationView extends StatelessWidget {
                                       decoration: BoxDecoration(
                                           color: AppColors.white,
                                           borderRadius:
-                                          BorderRadius.circular(50)),
+                                              BorderRadius.circular(50)),
                                       width: 25,
                                       child: Center(
                                           child: Icon(
-                                            Icons.add,
-                                            color: AppColors.blue,
-                                          )),
+                                        Icons.add,
+                                        color: AppColors.blue,
+                                      )),
                                     ),
                                     const SizedBox(
                                       width: 8,
@@ -118,21 +129,55 @@ class LocationView extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 10,),
+                            SizedBox(
+                              height: 10,
+                            ),
                             Text('Location Name *'),
-                            SizedBox(height: 5,),
-                            FormTextField(hintText: 'Location Name', controller: controller),
-                            SizedBox(height: 10,),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            FormTextField(
+                                hintText: 'Location Name',
+                                controller: controller),
+                            SizedBox(
+                              height: 10,
+                            ),
                             Text('Latitude *'),
-                            SizedBox(height: 5,),
-                            FormTextField(hintText: 'Latitude', controller: controller),
-                            SizedBox(height: 10,),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            FormTextField(
+                                hintText: 'Latitude', controller: controller),
+                            SizedBox(
+                              height: 10,
+                            ),
                             Text('Longitude *'),
-                            SizedBox(height: 5,),
-                            FormTextField(hintText: 'Longitude', controller: controller),
-                            SizedBox(height: 10,),
-                            CustomButtons(title: 'Submit'),
-                          ],),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            FormTextField(
+                                hintText: 'Longitude', controller: controller),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            CustomButtons(
+                              title: 'Submit',
+                              onPressed: () {
+                                Stream<QuerySnapshot<LocationModel>>
+                                    dataStream =
+                                    _databaseService.getLocations();
+                                dataStream.listen(
+                                    (QuerySnapshot<LocationModel> data) {
+                                  for (var doc in data.docs) {
+                                    LocationModel location = doc.data();
+                                    debugPrint(
+                                        'Location: ${location.locationName}');
+                                  }
+                                });
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                       Container(
                         width: double.infinity,
@@ -168,12 +213,13 @@ class LocationView extends StatelessWidget {
                                     decoration: BoxDecoration(
                                         border: Border.all(
                                             width: 1, color: AppColors.white)),
-                                    child: const Center(child: Text('Search Here!')),
+                                    child: const Center(
+                                        child: Text('Search Here!')),
                                   ),
                                   Container(
                                     width: 40,
                                     decoration:
-                                    BoxDecoration(color: AppColors.blue),
+                                        BoxDecoration(color: AppColors.blue),
                                     child: const Padding(
                                       padding: EdgeInsets.all(8.0),
                                       child: Center(
@@ -218,13 +264,16 @@ class LocationView extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 10,),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: SingleChildScrollView(
                           scrollDirection: Axis.vertical,
                           child: DataTable(
-                            headingRowColor: MaterialStateColor.resolveWith((states) => Colors.blue),
+                            headingRowColor: MaterialStateColor.resolveWith(
+                                (states) => Colors.blue),
                             columns: <DataColumn>[
                               DataColumn(label: Text('ID')),
                               DataColumn(label: Text('Name')),
@@ -244,7 +293,8 @@ class LocationView extends StatelessWidget {
                                     offset: const Offset(50, 30),
                                     padding: const EdgeInsets.all(0.0),
                                     shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10))),
                                     onSelected: (String choice) async {
                                       if (choice == 'Report') {
                                         //UserBlockConfirmationBottomSheet().show(context);
@@ -258,7 +308,9 @@ class LocationView extends StatelessWidget {
                                           value: 'Edit',
                                           child: Text(
                                             'Edit',
-                                            style: AppTextStyle.bodyText4().copyWith(color: AppColors.white),
+                                            style: AppTextStyle.bodyText4()
+                                                .copyWith(
+                                                    color: AppColors.white),
                                           ),
                                         ),
                                         PopupMenuItem<String>(
@@ -267,8 +319,9 @@ class LocationView extends StatelessWidget {
                                           value: 'Delete',
                                           child: Text(
                                             'Delete',
-                                            style:
-                                            AppTextStyle.bodyText4().copyWith(color: AppColors.white),
+                                            style: AppTextStyle.bodyText4()
+                                                .copyWith(
+                                                    color: AppColors.white),
                                           ),
                                         ),
                                       ];
@@ -277,11 +330,12 @@ class LocationView extends StatelessWidget {
                                       margin: const EdgeInsets.only(left: 10),
                                       decoration: BoxDecoration(
                                           color: AppColors.black,
-                                          borderRadius: BorderRadius.circular(12)),
+                                          borderRadius:
+                                              BorderRadius.circular(12)),
                                       child: const Padding(
                                           padding: EdgeInsets.all(8.0),
-                                          child: Icon(Icons.more_vert_outlined)
-                                      ),
+                                          child:
+                                              Icon(Icons.more_vert_outlined)),
                                     ),
                                   )),
                                 ],

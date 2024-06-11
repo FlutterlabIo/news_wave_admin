@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:news_wave_admin/features/main/providers/side_navigation_provider.dart';
+import 'package:provider/provider.dart';
 
 class SideMenu extends StatelessWidget {
   const SideMenu({
@@ -8,7 +10,7 @@ class SideMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
+    return Consumer<SideNavigationProvider>(builder: (context,value,child)=>Drawer(
       child: ListView(
         children: [
           DrawerHeader(
@@ -17,46 +19,133 @@ class SideMenu extends StatelessWidget {
           DrawerListTile(
             title: "Dashboard",
             svgSrc: "assets/icons/menu_dashboard.svg",
-            press: () {},
+            press: () {
+              value.changeIndex(0);
+            },
           ),
           DrawerListTile(
-            title: "Transaction",
+            title: "Category",
             svgSrc: "assets/icons/menu_tran.svg",
-            press: () {},
+            press: () {
+              value.changeIndex(1);
+            },
           ),
           DrawerListTile(
-            title: "Task",
+            title: "Subcategory",
             svgSrc: "assets/icons/menu_task.svg",
-            press: () {},
+            press: () {
+              value.changeIndex(2);
+            },
           ),
           DrawerListTile(
-            title: "Documents",
+            title: "Tag",
             svgSrc: "assets/icons/menu_doc.svg",
-            press: () {},
+            press: () {
+              value.changeIndex(3);
+            },
           ),
           DrawerListTile(
-            title: "Store",
+            title: "News",
             svgSrc: "assets/icons/menu_store.svg",
-            press: () {},
+            press: () {
+              value.changeIndex(4);
+            },
           ),
           DrawerListTile(
-            title: "Notification",
+            title: "Breaking News",
             svgSrc: "assets/icons/menu_notification.svg",
-            press: () {},
+            press: () {
+              value.changeIndex(5);
+            },
           ),
           DrawerListTile(
-            title: "Profile",
+            title: "Live Streaming",
             svgSrc: "assets/icons/menu_profile.svg",
-            press: () {},
+            press: () {
+              value.changeIndex(6);
+            },
           ),
           DrawerListTile(
-            title: "Settings",
+            title: "Featured Section",
             svgSrc: "assets/icons/menu_setting.svg",
-            press: () {},
+            press: () {
+              value.changeIndex(7);
+            },
+          ),
+          DrawerListTile(
+            title: "Ad Spaces",
+            svgSrc: "assets/icons/menu_setting.svg",
+            press: () {
+              value.changeIndex(8);
+            },
+          ),
+          DrawerListTile(
+            title: "User",
+            svgSrc: "assets/icons/menu_setting.svg",
+            press: () {
+              value.changeIndex(9);
+            },
+          ),
+
+          DrawerListTile(
+            title: "User Role",
+            svgSrc: "assets/icons/menu_setting.svg",
+            press: () {
+              value.changeIndex(10);
+            },
+          ),
+          DrawerListTile(
+            title: "Comment",
+            svgSrc: "assets/icons/menu_setting.svg",
+            press: () {
+              value.changeIndex(11);
+            },
+          ),
+          DrawerListTile(
+            title: "Comment Flag",
+            svgSrc: "assets/icons/menu_setting.svg",
+            press: () {
+              value.changeIndex(12);
+            },
+          ),
+          DrawerListTile(
+            title: "Send Notification",
+            svgSrc: "assets/icons/menu_setting.svg",
+            press: () {
+              value.changeIndex(13);
+            },
+          ),
+          DrawerListTile(
+            title: "Survey",
+            svgSrc: "assets/icons/menu_setting.svg",
+            press: () {
+              value.changeIndex(14);
+            },
+          ),
+          DrawerListTile(
+            title: "Location",
+            svgSrc: "assets/icons/menu_setting.svg",
+            press: () {
+              value.changeIndex(15);
+            },
+          ),
+          DrawerListTile(
+            title: "Pages",
+            svgSrc: "assets/icons/menu_setting.svg",
+            press: () {
+              value.changeIndex(16);
+            },
+          ),
+          DrawerListTile(
+            title: "System settings",
+            svgSrc: "assets/icons/menu_setting.svg",
+            press: () {
+              value.changeIndex(17);
+            },
           ),
         ],
       ),
-    );
+    ));
   }
 }
 
